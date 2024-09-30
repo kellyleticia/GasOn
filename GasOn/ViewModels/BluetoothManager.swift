@@ -13,6 +13,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     @Published var isBluetoothEnabled = false
     @Published var discoveredPeripherals = [PeripheralInfo]()
     @Published var receivedData: String = ""
+    @Published var receivedPercentage: Float?
 
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
@@ -107,6 +108,15 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if let value = characteristic.value {
             let stringValue = String(data: value, encoding: .utf8) ?? "Invalid data"
             dataBuffer.append(value)
+            
+            if stringValue.contains("Peso percentual:") {
+                if let percentageString = stringValue.split(separator: ":").last?.trimmingCharacters(in: .whitespacesAndNewlines),
+                   let percentage = Float(percentageString.replacingOccurrences(of: "%", with: "")) {
+                    DispatchQueue.main.async {
+                        self.receivedPercentage = percentage
+                    }
+                }
+            }
             
             if stringValue.contains("Pressure:") {
                 DispatchQueue.main.async {

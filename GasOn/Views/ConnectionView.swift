@@ -24,8 +24,14 @@ struct ConnectionView: View {
     private var content: some View {
         VStack {
             bluetoothStatusView
+            
             if bluetoothManager.isBluetoothEnabled {
                 DeviceListView(bluetoothManager: bluetoothManager, filteredPeripherals: filteredPeripherals)
+
+                if let percentage = bluetoothManager.receivedPercentage { 
+                    GasLevelView(percentage: percentage)
+                        .padding()
+                }
             } else {
                 Text("Ligue o Bluetooth para ver os dispositivos.")
                     .foregroundColor(.gray)
