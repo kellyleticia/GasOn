@@ -20,7 +20,7 @@ struct HomeView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    HeaderView()
+                    HeaderView(bluetoothManager: bluetoothManager)
                     Spacer()
                     GasLevelView(percentage: bluetoothManager.receivedPercentage ?? 0) 
                     Spacer()

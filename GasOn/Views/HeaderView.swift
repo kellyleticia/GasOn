@@ -8,16 +8,26 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @ObservedObject var bluetoothManager: BluetoothManager
+
     var body: some View {
         HStack {
-            DateInfoView(title: "Início de Uso", date: "04/06/2024", color: .blueDefault)
+            DateInfoView(title: "Início de Uso", date: formattedDate(bluetoothManager.gasStartDate), color: .blueDefault)
             Spacer()
-            DateInfoView(title: "Fim de Uso", date: "04/07/2024", color: .redDefault)
+            DateInfoView(title: "Fim de Uso", date: formattedDate(bluetoothManager.gasEndDate), color: .redDefault)
         }
         .padding(30)
         .background(Color.darkGrayDefault)
         .cornerRadius(10)
         .padding(.horizontal)
         .padding(.top, 40)
+    }
+    
+    private func formattedDate(_ date: Date?) -> String {
+        guard let date = date else { return "N/A" }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none 
+        return formatter.string(from: date)
     }
 }

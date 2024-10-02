@@ -14,6 +14,7 @@
 		FE0AAD472C7A9BAD00AD7488 /* GasOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD462C7A9BAD00AD7488 /* GasOnUITests.swift */; };
 		FE0AAD492C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */; };
 		FE0AAD572C7A9DBD00AD7488 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */; };
+		FE2111602CADB7360090153C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21115F2CADB72E0090153C /* UserDefaults.swift */; };
 		FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */; };
 		FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */; };
 		FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */; };
@@ -59,6 +60,7 @@
 		FE0AAD552C7A9CEF00AD7488 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		FE0C151F2C87931600CDEA0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FE21115F2CADB72E0090153C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		FE2891ED2CAA302600D3A8BA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				FE21115F2CADB72E0090153C /* UserDefaults.swift */,
 				FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */,
 			);
 			path = ViewModels;
@@ -250,7 +253,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					FE0AAD252C7A9BAC00AD7488 = {
 						CreatedOnToolsVersion = 15.4;
@@ -328,6 +331,7 @@
 				FEDFAC7D2C8E7AC20089A0D5 /* DateInfoView.swift in Sources */,
 				FE0AAD2A2C7A9BAC00AD7488 /* GasOnApp.swift in Sources */,
 				FEDFAC7B2C8E7A8B0089A0D5 /* TrailingNavigationItem.swift in Sources */,
+				FE2111602CADB7360090153C /* UserDefaults.swift in Sources */,
 				FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */,
 				FEDFAC6F2C8E77D80089A0D5 /* HeaderView.swift in Sources */,
 				FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */,
@@ -553,7 +557,6 @@
 		FE0AAD502C7A9BAD00AD7488 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -573,7 +576,6 @@
 		FE0AAD512C7A9BAD00AD7488 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -593,7 +595,6 @@
 		FE0AAD532C7A9BAD00AD7488 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76MD982A9T;
@@ -611,7 +612,6 @@
 		FE0AAD542C7A9BAD00AD7488 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 76MD982A9T;
