@@ -16,7 +16,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     @Published var receivedPercentage: Float?
     @Published var gasStartDate: Date?
     @Published var gasEndDate: Date?
-
+    
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
     private var dataBuffer = Data()
@@ -136,7 +136,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if stringValue.contains("Peso:") {
             if let weightString = stringValue.split(separator: ":").last?.trimmingCharacters(in: .whitespacesAndNewlines),
                let weight = Float(weightString),
-               let lastPercentage = receivedPercentage, weight > 80 {
+               let lastPercentage = receivedPercentage, weight < 0.1 {
                 resetForNewGasCylinder()
             }
         }
@@ -151,7 +151,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                         UserDefaults.standard.saveGasStartDate(self.gasStartDate!)
                     }
                     UserDefaults.standard.saveLastKnownPercentage(percentage)
-                    self.estimateGasEndDate(percentage: percentage)
+                    self.updateEstimatedEndDate()
                 }
             }
         }
@@ -163,13 +163,20 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
 
-    private func estimateGasEndDate(percentage: Float) {
-        let estimatedDaysRemaining = percentage / 1.0
-        let estimatedEndDate = Calendar.current.date(byAdding: .day, value: Int(estimatedDaysRemaining), to: Date())
+    private func updateEstimatedEndDate() {
+        guard let startDate = gasStartDate,
+              let initialPercentage = receivedPercentage,
+              let currentPercentage = receivedPercentage else {
+            return
+        }
+        
+        let elapsedTime = Date().timeIntervalSince(startDate) / (60 * 60 * 24)
+        let consumptionRate = (initialPercentage - currentPercentage) / Float(elapsedTime)
 
-        if let endDate = estimatedEndDate {
-            self.gasEndDate = endDate
-            UserDefaults.standard.saveGasEndDate(endDate)
+        if consumptionRate > 0 {
+            let remainingDays = currentPercentage / consumptionRate
+            gasEndDate = Calendar.current.date(byAdding: .day, value: Int(remainingDays), to: Date())
+            UserDefaults.standard.saveGasEndDate(gasEndDate!)
         }
     }
 }
