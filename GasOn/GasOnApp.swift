@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct GasOnApp: App {
+    @StateObject private var bluetoothManager = BluetoothManager()
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -30,6 +32,7 @@ struct GasOnApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(bluetoothManager)
         }
         .modelContainer(sharedModelContainer)
     }
@@ -44,6 +47,6 @@ struct GasOnApp: App {
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance 
+        UINavigationBar.appearance().compactAppearance = appearance
     }
 }

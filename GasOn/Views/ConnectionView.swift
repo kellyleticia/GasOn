@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ConnectionView: View {
-    
-    @StateObject private var bluetoothManager = BluetoothManager()
+    @EnvironmentObject var bluetoothManager: BluetoothManager
 
     var body: some View {
         ZStack {
@@ -17,8 +16,6 @@ struct ConnectionView: View {
             content
         }
         .navigationBarTitle("Bluetooth", displayMode: .inline)
-        .onAppear {
-        }
     }
     
     private var content: some View {
@@ -28,7 +25,7 @@ struct ConnectionView: View {
             if bluetoothManager.isBluetoothEnabled {
                 DeviceListView(bluetoothManager: bluetoothManager, filteredPeripherals: filteredPeripherals)
 
-                if let percentage = bluetoothManager.receivedPercentage { 
+                if let percentage = bluetoothManager.receivedPercentage {
                     GasLevelView(percentage: percentage)
                         .padding()
                 }

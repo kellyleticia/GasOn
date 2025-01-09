@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var bluetoothManager = BluetoothManager()
+    @EnvironmentObject var bluetoothManager: BluetoothManager
 
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -22,7 +22,7 @@ struct HomeView: View {
                 VStack {
                     HeaderView(bluetoothManager: bluetoothManager)
                     Spacer()
-                    GasLevelView(percentage: bluetoothManager.receivedPercentage ?? 0) 
+                    GasLevelView(percentage: bluetoothManager.receivedPercentage ?? 0)
                     Spacer()
                 }
             }

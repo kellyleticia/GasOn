@@ -61,24 +61,41 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         switch central.state {
         case .poweredOn:
             isBluetoothEnabled = true
-            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            let scanOptions: [String: Any] = [
+                CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true)
+            ]
+            
+            centralManager.scanForPeripherals(withServices: nil, options: scanOptions)
+            
         case .poweredOff:
             isBluetoothEnabled = false
             centralManager.stopScan()
+            
         case .resetting, .unauthorized, .unsupported, .unknown:
             isBluetoothEnabled = false
+            
         @unknown default:
             isBluetoothEnabled = false
         }
     }
-
+    
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        let targetDeviceName = "ESP32_BLE_Weight"
+        
+        if let peripheralName = peripheral.name, peripheralName == targetDeviceName {
+            print("Dispositivo específico encontrado: \(peripheralName)")
+            
+            connect(PeripheralInfo(peripheral: peripheral, isConnected: false))
+        } else {
+            print("Dispositivo \(peripheral.name ?? "desconhecido") não é o dispositivo alvo.")
+        }
+
         if !discoveredPeripherals.contains(where: { $0.peripheral == peripheral }) {
             let newPeripheralInfo = PeripheralInfo(peripheral: peripheral, isConnected: false)
             discoveredPeripherals.append(newPeripheralInfo)
-            print("Discovered peripheral: \(peripheral.name ?? "unknown")")
         }
     }
+
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("DID CONNECT TO \(peripheral.name ?? "unknown")")
