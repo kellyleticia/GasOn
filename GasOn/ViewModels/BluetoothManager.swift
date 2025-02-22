@@ -268,12 +268,23 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         
         let elapsedTime = Date().timeIntervalSince(startDate) / (60 * 60 * 24)
+        
+        if initialPercentage == currentPercentage || elapsedTime < 0.01 {
+            gasEndDate = nil
+            UserDefaults.standard.removeObject(forKey: BluetoothKeys.gasEndDate)
+            return
+        }
+        
         let consumptionRate = (initialPercentage - currentPercentage) / Float(elapsedTime)
-
+        
         if consumptionRate > 0 {
             let remainingDays = currentPercentage / consumptionRate
             gasEndDate = Calendar.current.date(byAdding: .day, value: Int(remainingDays), to: Date())
             UserDefaults.standard.saveGasEndDate(gasEndDate!)
+        } else {
+            gasEndDate = nil
+            UserDefaults.standard.removeObject(forKey: BluetoothKeys.gasEndDate)
         }
     }
+
 }
