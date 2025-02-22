@@ -10,6 +10,9 @@ import Combine
 
 class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, ObservableObject {
     
+    private let serviceUUID = CBUUID(string: "F1F1")
+    private let characteristicUUID = CBUUID(string: "F1F2")
+    
     @Published var isBluetoothEnabled = false
     @Published var discoveredPeripherals = [PeripheralInfo]()
     @Published var receivedData: String = ""
@@ -20,6 +23,8 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
     private var dataBuffer = Data()
+    
+    private let targetDeviceName = "gas_on"
 
     struct BluetoothKeys {
         static let gasStartDate = "gasStartDate"
@@ -47,9 +52,15 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     }
     
     func connect(_ peripheralInfo: PeripheralInfo) {
-        if let currentConnectedPeripheral = discoveredPeripherals.first(where: { $0.isConnected }) {
-            disconnect(currentConnectedPeripheral)
+        guard peripheralInfo.peripheral.state != .connected else { return }
+        
+        // Disconnect existing connection
+        if let currentConnected = connectedPeripheral {
+            centralManager.cancelPeripheralConnection(currentConnected)
         }
+        
+        connectedPeripheral = peripheralInfo.peripheral
+        connectedPeripheral?.delegate = self
         centralManager.connect(peripheralInfo.peripheral)
     }
 
@@ -64,7 +75,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             let scanOptions: [String: Any] = [
                 CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true)
             ]
-            
             centralManager.scanForPeripherals(withServices: nil, options: scanOptions)
             
         case .poweredOff:
@@ -79,26 +89,36 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        let targetDeviceName = "ESP32_BLE_Weight"
+    func centralManager(_ central: CBCentralManager,
+                        didDiscover peripheral: CBPeripheral,
+                        advertisementData: [String : Any],
+                        rssi RSSI: NSNumber) {
+        let targetDeviceName = "gas_on"
         
-        if let peripheralName = peripheral.name, peripheralName == targetDeviceName {
-            print("Dispositivo específico encontrado: \(peripheralName)")
-            
-            connect(PeripheralInfo(peripheral: peripheral, isConnected: false))
-        } else {
-            print("Dispositivo \(peripheral.name ?? "desconhecido") não é o dispositivo alvo.")
+        // Usa advertisementData para buscar o nome local se peripheral.name estiver nulo
+        let peripheralName = peripheral.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "desconhecido")
+        
+        guard peripheralName == targetDeviceName else {
+            print("Dispositivo \(peripheralName) não é o dispositivo alvo.")
+            return
         }
-
-        if !discoveredPeripherals.contains(where: { $0.peripheral == peripheral }) {
-            let newPeripheralInfo = PeripheralInfo(peripheral: peripheral, isConnected: false)
-            discoveredPeripherals.append(newPeripheralInfo)
+        
+        // Se já foi adicionado, não tenta conectar novamente
+        if discoveredPeripherals.contains(where: { $0.peripheral == peripheral }) {
+            return
         }
+        
+        print("Dispositivo específico encontrado: \(peripheralName)")
+        let peripheralInfo = PeripheralInfo(peripheral: peripheral, isConnected: false)
+        discoveredPeripherals.append(peripheralInfo)
+        connect(peripheralInfo)
     }
-
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("DID CONNECT TO \(peripheral.name ?? "unknown")")
+        // Para o scan para reduzir interferência
+        centralManager.stopScan()
+        
         connectedPeripheral = peripheral
         connectedPeripheral?.delegate = self
         connectedPeripheral?.discoverServices(nil)
@@ -111,7 +131,9 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    func centralManager(_ central: CBCentralManager,
+                        didDisconnectPeripheral peripheral: CBPeripheral,
+                        error: Error?) {
         print("DID DISCONNECT FROM \(peripheral.name ?? "unknown")")
         
         if let index = discoveredPeripherals.firstIndex(where: { $0.peripheral == peripheral }) {
@@ -121,6 +143,19 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             }
         }
         connectedPeripheral = nil
+        
+        // Reinicia o scan para tentar reconectar
+        let scanOptions: [String: Any] = [
+            CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true)
+        ]
+        centralManager.scanForPeripherals(withServices: nil, options: scanOptions)
+        
+        // Se for o dispositivo alvo, tenta reconectar
+        let peripheralName = peripheral.name ?? "desconhecido"
+        if peripheralName == targetDeviceName {
+            print("Tentando reconectar \(peripheralName)")
+            connect(PeripheralInfo(peripheral: peripheral, isConnected: false))
+        }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -130,7 +165,9 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    func peripheral(_ peripheral: CBPeripheral,
+                    didDiscoverCharacteristicsFor service: CBService,
+                    error: Error?) {
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
             if characteristic.properties.contains(.notify) {
@@ -141,42 +178,92 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let value = characteristic.value {
-            let stringValue = String(data: value, encoding: .utf8) ?? "Invalid data"
-            dataBuffer.append(value)
-            handleReceivedData(stringValue)
+    private func enableNotifications(for characteristic: CBCharacteristic, peripheral: CBPeripheral) {
+        peripheral.setNotifyValue(true, for: characteristic)
+        
+        if let descriptors = characteristic.descriptors,
+           let cccd = descriptors.first(where: { $0.uuid == CBUUID(string: "2902") }) {
+            
+            print("Escrevendo 0x0100 no CCCD...")
+            peripheral.writeValue(Data([0x01, 0x00]), for: cccd)
+            
+        } else {
+            print("CCCD não encontrado. Descobrindo descritores...")
+            peripheral.discoverDescriptors(for: characteristic)
         }
     }
 
+    func peripheral(_ peripheral: CBPeripheral,
+                    didDiscoverDescriptorsFor characteristic: CBCharacteristic,
+                    error: Error?) {
+        
+        if let error = error {
+            print("Erro ao descobrir descritores: \(error.localizedDescription)")
+            return
+        }
+        
+        if let cccd = characteristic.descriptors?.first(where: { $0.uuid == CBUUID(string: "2902") }) {
+            print("CCCD encontrado após descoberta. Habilitando notificações...")
+            peripheral.writeValue(Data([0x01, 0x00]), for: cccd)
+        }
+    }
+
+    // Adicione este método para verificar erros na escrita do CCCD
+    func peripheral(_ peripheral: CBPeripheral,
+                    didWriteValueFor descriptor: CBDescriptor,
+                    error: Error?) {
+        
+        if let error = error {
+            print("Falha ao escrever no CCCD: \(error.localizedDescription)")
+        } else {
+            print("Notificações habilitadas com sucesso!")
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral,
+                    didUpdateValueFor characteristic: CBCharacteristic,
+                    error: Error?) {
+        
+        if let error = error {
+            print("Erro ao receber dados: \(error.localizedDescription)")
+            return
+        }
+        
+        guard let data = characteristic.value else {
+            print("Dados vazios")
+            return
+        }
+        
+        let rawString = String(data: data, encoding: .utf8) ?? "Inválido"
+        print("Dados brutos recebidos: \(rawString)")
+        
+        handleReceivedData(rawString)
+    }
+    
     private func handleReceivedData(_ stringValue: String) {
-        if stringValue.contains("Peso:") {
-            if let weightString = stringValue.split(separator: ":").last?.trimmingCharacters(in: .whitespacesAndNewlines),
-               let weight = Float(weightString),
-               let lastPercentage = receivedPercentage, weight < 0.1 {
-                resetForNewGasCylinder()
-            }
+        let numericString = stringValue
+            .replacingOccurrences(of: "%", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard let percentage = Float(numericString) else {
+            print("Failed to convert value: \(stringValue)")
+            return
         }
         
-        if stringValue.contains("Peso percentual:") {
-            if let percentageString = stringValue.split(separator: ":").last?.trimmingCharacters(in: .whitespacesAndNewlines),
-               let percentage = Float(percentageString.replacingOccurrences(of: "%", with: "")) {
-                DispatchQueue.main.async {
-                    self.receivedPercentage = percentage
-                    if self.gasStartDate == nil {
-                        self.gasStartDate = Date()
-                        UserDefaults.standard.saveGasStartDate(self.gasStartDate!)
-                    }
-                    UserDefaults.standard.saveLastKnownPercentage(percentage)
-                    self.updateEstimatedEndDate()
-                }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Atualiza os dados
+            self.receivedPercentage = percentage
+            
+            // Gerencia datas
+            if self.gasStartDate == nil {
+                self.gasStartDate = Date()
+                UserDefaults.standard.set(self.gasStartDate, forKey: BluetoothKeys.gasStartDate)
             }
-        }
-        
-        if stringValue.contains("Pressure:") {
-            DispatchQueue.main.async {
-                self.receivedData = stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-            }
+            
+            UserDefaults.standard.set(percentage, forKey: BluetoothKeys.lastKnownPercentage)
+            self.updateEstimatedEndDate()
         }
     }
 

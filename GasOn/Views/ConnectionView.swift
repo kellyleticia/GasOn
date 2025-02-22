@@ -25,10 +25,10 @@ struct ConnectionView: View {
             if bluetoothManager.isBluetoothEnabled {
                 DeviceListView(bluetoothManager: bluetoothManager, filteredPeripherals: filteredPeripherals)
 
-                if let percentage = bluetoothManager.receivedPercentage {
-                    GasLevelView(percentage: percentage)
-                        .padding()
-                }
+//                if let percentage = bluetoothManager.receivedPercentage {
+//                    GasLevelView(percentage: percentage)
+//                        .padding()
+//                }
             } else {
                 Text("Ligue o Bluetooth para ver os dispositivos.")
                     .foregroundColor(.gray)
