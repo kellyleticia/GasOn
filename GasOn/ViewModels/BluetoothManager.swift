@@ -19,6 +19,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     @Published var receivedPercentage: Float?
     @Published var gasStartDate: Date?
     @Published var gasEndDate: Date?
+    private var initialPercentage: Float?
     
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
@@ -54,7 +55,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     func connect(_ peripheralInfo: PeripheralInfo) {
         guard peripheralInfo.peripheral.state != .connected else { return }
         
-        // Disconnect existing connection
         if let currentConnected = connectedPeripheral {
             centralManager.cancelPeripheralConnection(currentConnected)
         }
@@ -95,7 +95,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                         rssi RSSI: NSNumber) {
         let targetDeviceName = "gas_on"
         
-        // Usa advertisementData para buscar o nome local se peripheral.name estiver nulo
         let peripheralName = peripheral.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? "desconhecido")
         
         guard peripheralName == targetDeviceName else {
@@ -103,7 +102,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             return
         }
         
-        // Se já foi adicionado, não tenta conectar novamente
         if discoveredPeripherals.contains(where: { $0.peripheral == peripheral }) {
             return
         }
@@ -116,7 +114,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("DID CONNECT TO \(peripheral.name ?? "unknown")")
-        // Para o scan para reduzir interferência
         centralManager.stopScan()
         
         connectedPeripheral = peripheral
@@ -144,13 +141,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
         connectedPeripheral = nil
         
-        // Reinicia o scan para tentar reconectar
         let scanOptions: [String: Any] = [
             CBCentralManagerScanOptionAllowDuplicatesKey: NSNumber(value: true)
         ]
         centralManager.scanForPeripherals(withServices: nil, options: scanOptions)
         
-        // Se for o dispositivo alvo, tenta reconectar
         let peripheralName = peripheral.name ?? "desconhecido"
         if peripheralName == targetDeviceName {
             print("Tentando reconectar \(peripheralName)")
@@ -208,7 +203,6 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }
     }
 
-    // Adicione este método para verificar erros na escrita do CCCD
     func peripheral(_ peripheral: CBPeripheral,
                     didWriteValueFor descriptor: CBDescriptor,
                     error: Error?) {
@@ -253,12 +247,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            // Atualiza os dados
             self.receivedPercentage = percentage
             
-            // Gerencia datas
             if self.gasStartDate == nil {
                 self.gasStartDate = Date()
+                self.initialPercentage = percentage
                 UserDefaults.standard.set(self.gasStartDate, forKey: BluetoothKeys.gasStartDate)
             }
             
@@ -269,7 +262,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     private func updateEstimatedEndDate() {
         guard let startDate = gasStartDate,
-              let initialPercentage = receivedPercentage,
+              let initialPercentage = self.initialPercentage,
               let currentPercentage = receivedPercentage else {
             return
         }
