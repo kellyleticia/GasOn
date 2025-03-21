@@ -7,7 +7,7 @@
 
 import CoreBluetooth
 
-struct PeripheralInfo {
-    var peripheral: CBPeripheral
-    var isConnected: Bool
+public struct PeripheralInfo {
+    public var peripheral: PeripheralProtocol 
+    public var isConnected: Bool
 }

@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		FE0AAD2A2C7A9BAC00AD7488 /* GasOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD292C7A9BAC00AD7488 /* GasOnApp.swift */; };
 		FE0AAD2E2C7A9BAC00AD7488 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */; };
-		FE0AAD3D2C7A9BAD00AD7488 /* GasOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD3C2C7A9BAD00AD7488 /* GasOnTests.swift */; };
 		FE0AAD472C7A9BAD00AD7488 /* GasOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD462C7A9BAD00AD7488 /* GasOnUITests.swift */; };
 		FE0AAD492C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */; };
 		FE2111602CADB7360090153C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21115F2CADB72E0090153C /* UserDefaults.swift */; };
 		FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */; };
 		FE2A6C892D8DE549005D224C /* DeviceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C882D8DE549005D224C /* DeviceListViewModel.swift */; };
 		FE2A6C8C2D8DE664005D224C /* DeviceRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C8B2D8DE65E005D224C /* DeviceRowCell.swift */; };
+		FE2A6C992D8E006F005D224C /* UserDefaultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C982D8E0067005D224C /* UserDefaultTests.swift */; };
+		FE2A6C9B2D8E0097005D224C /* GasDataViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C9A2D8E008E005D224C /* GasDataViewModelTests.swift */; };
+		FE2A6C9D2D8E11BD005D224C /* MockBluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C9C2D8E11AF005D224C /* MockBluetoothService.swift */; };
+		FE2A6C9F2D8E11D9005D224C /* DeviceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C9E2D8E11C3005D224C /* DeviceListViewModelTests.swift */; };
+		FE2A6CA12D8E1D27005D224C /* PeripheralProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6CA02D8E1D1D005D224C /* PeripheralProtocol.swift */; };
 		FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */; };
 		FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */; };
 		FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */; };
@@ -54,7 +58,6 @@
 		FE0AAD292C7A9BAC00AD7488 /* GasOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnApp.swift; sourceTree = "<group>"; };
 		FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FE0AAD382C7A9BAD00AD7488 /* GasOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GasOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE0AAD3C2C7A9BAD00AD7488 /* GasOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnTests.swift; sourceTree = "<group>"; };
 		FE0AAD422C7A9BAD00AD7488 /* GasOnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GasOnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0AAD462C7A9BAD00AD7488 /* GasOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnUITests.swift; sourceTree = "<group>"; };
 		FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -64,6 +67,11 @@
 		FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		FE2A6C882D8DE549005D224C /* DeviceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModel.swift; sourceTree = "<group>"; };
 		FE2A6C8B2D8DE65E005D224C /* DeviceRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRowCell.swift; sourceTree = "<group>"; };
+		FE2A6C982D8E0067005D224C /* UserDefaultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultTests.swift; sourceTree = "<group>"; };
+		FE2A6C9A2D8E008E005D224C /* GasDataViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasDataViewModelTests.swift; sourceTree = "<group>"; };
+		FE2A6C9C2D8E11AF005D224C /* MockBluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBluetoothService.swift; sourceTree = "<group>"; };
+		FE2A6C9E2D8E11C3005D224C /* DeviceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModelTests.swift; sourceTree = "<group>"; };
+		FE2A6CA02D8E1D1D005D224C /* PeripheralProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralProtocol.swift; sourceTree = "<group>"; };
 		FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRow.swift; sourceTree = "<group>"; };
@@ -146,7 +154,10 @@
 		FE0AAD3B2C7A9BAD00AD7488 /* GasOnTests */ = {
 			isa = PBXGroup;
 			children = (
-				FE0AAD3C2C7A9BAD00AD7488 /* GasOnTests.swift */,
+				FE2A6C9E2D8E11C3005D224C /* DeviceListViewModelTests.swift */,
+				FE2A6C9C2D8E11AF005D224C /* MockBluetoothService.swift */,
+				FE2A6C9A2D8E008E005D224C /* GasDataViewModelTests.swift */,
+				FE2A6C982D8E0067005D224C /* UserDefaultTests.swift */,
 			);
 			path = GasOnTests;
 			sourceTree = "<group>";
@@ -222,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */,
+				FE2A6CA02D8E1D1D005D224C /* PeripheralProtocol.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -393,6 +405,7 @@
 				FE0AAD2E2C7A9BAC00AD7488 /* Item.swift in Sources */,
 				FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */,
 				FE4EB0952D8D137400CEB811 /* GasDataViewModel.swift in Sources */,
+				FE2A6CA12D8E1D27005D224C /* PeripheralProtocol.swift in Sources */,
 				FEDFAC712C8E78260089A0D5 /* GasLevelView.swift in Sources */,
 				FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */,
 				FE4EB0932D8D12EC00CEB811 /* BluetoothService.swift in Sources */,
@@ -414,7 +427,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE0AAD3D2C7A9BAD00AD7488 /* GasOnTests.swift in Sources */,
+				FE2A6C9F2D8E11D9005D224C /* DeviceListViewModelTests.swift in Sources */,
+				FE2A6C9D2D8E11BD005D224C /* MockBluetoothService.swift in Sources */,
+				FE2A6C992D8E006F005D224C /* UserDefaultTests.swift in Sources */,
+				FE2A6C9B2D8E0097005D224C /* GasDataViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

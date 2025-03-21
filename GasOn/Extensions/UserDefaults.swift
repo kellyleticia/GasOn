@@ -7,13 +7,14 @@
 
 import Foundation
 
+import Foundation
+
 extension UserDefaults {
     enum Keys {
         static let gasStartDate = "gasStartDate"
         static let gasEndDate = "gasEndDate"
         static let lastKnownPercentage = "lastKnownPercentage"
     }
-
     func saveGasStartDate(_ date: Date) {
         set(date, forKey: Keys.gasStartDate)
     }
