@@ -20,7 +20,7 @@ struct HomeView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    HeaderView(viewModel: viewModel)
+                    HeaderView()
                     Spacer()
                     GasLevelView(percentage: viewModel.receivedPercentage ?? 0)
                     Spacer()

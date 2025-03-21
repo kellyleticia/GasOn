@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @ObservedObject var viewModel: GasDataViewModel
+    @EnvironmentObject var viewModel: GasDataViewModel
 
     var body: some View {
         HStack {

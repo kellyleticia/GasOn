@@ -9,16 +9,14 @@ import SwiftUI
 
 struct DeviceListViewWrapper: UIViewControllerRepresentable {
     @EnvironmentObject var bluetoothService: BluetoothService
-    var filteredPeripherals: [PeripheralInfo]
     
     func makeUIViewController(context: Context) -> DeviceListViewController {
-        let vc = DeviceListViewController()
-        vc.bluetoothService = bluetoothService 
-        vc.filteredPeripherals = filteredPeripherals
-        return vc
+        let viewModel = DeviceListViewModel(bluetoothService: bluetoothService)
+        return DeviceListViewController.create(with: viewModel)
     }
     
     func updateUIViewController(_ uiViewController: DeviceListViewController, context: Context) {
+        uiViewController.viewModel.updateFilteredPeripherals()
     }
 }
 
@@ -38,7 +36,7 @@ struct ConnectionView: View {
             bluetoothStatusView
             
             if bluetoothService.isBluetoothEnabled {
-                DeviceListViewWrapper(filteredPeripherals: filteredPeripherals)
+                DeviceListViewWrapper()
             } else {
                 Text("Ligue o Bluetooth para ver os dispositivos.")
                     .foregroundColor(.gray)

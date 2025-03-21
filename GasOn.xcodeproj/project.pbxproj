@@ -14,6 +14,8 @@
 		FE0AAD492C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */; };
 		FE2111602CADB7360090153C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21115F2CADB72E0090153C /* UserDefaults.swift */; };
 		FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */; };
+		FE2A6C892D8DE549005D224C /* DeviceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C882D8DE549005D224C /* DeviceListViewModel.swift */; };
+		FE2A6C8C2D8DE664005D224C /* DeviceRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2A6C8B2D8DE65E005D224C /* DeviceRowCell.swift */; };
 		FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */; };
 		FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */; };
 		FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */; };
@@ -60,6 +62,8 @@
 		FE0C151F2C87931600CDEA0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FE21115F2CADB72E0090153C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
+		FE2A6C882D8DE549005D224C /* DeviceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModel.swift; sourceTree = "<group>"; };
+		FE2A6C8B2D8DE65E005D224C /* DeviceRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRowCell.swift; sourceTree = "<group>"; };
 		FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRow.swift; sourceTree = "<group>"; };
@@ -159,8 +163,8 @@
 		FE2891EC2CAA301B00D3A8BA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */,
-				FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */,
+				FE2A6C952D8DEA7B005D224C /* CoreData */,
+				FE2A6C942D8DEA73005D224C /* Bluetooth */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,8 +173,65 @@
 			isa = PBXGroup;
 			children = (
 				FE4EB0942D8D137400CEB811 /* GasDataViewModel.swift */,
+				FE2A6C882D8DE549005D224C /* DeviceListViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE2A6C8A2D8DE625005D224C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				FE2A6C8B2D8DE65E005D224C /* DeviceRowCell.swift */,
+				FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		FE2A6C8D2D8DE684005D224C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				FE2A6C932D8DE6A4005D224C /* Screens */,
+				FE2A6C902D8DE698005D224C /* Components */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		FE2A6C902D8DE698005D224C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FEDFAC6E2C8E77D80089A0D5 /* HeaderView.swift */,
+				FEDFAC7A2C8E7A8B0089A0D5 /* TrailingNavigationItem.swift */,
+				FEDFAC722C8E78520089A0D5 /* LeadingNavigationItem.swift */,
+				FEDFAC702C8E78260089A0D5 /* GasLevelView.swift */,
+				FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */,
+				FEDFAC7C2C8E7AC20089A0D5 /* DateInfoView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FE2A6C932D8DE6A4005D224C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */,
+				FE0C151F2C87931600CDEA0A /* HomeView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		FE2A6C942D8DEA73005D224C /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		FE2A6C952D8DEA7B005D224C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		FE4EB0902D8D11E300CEB811 /* Extensions */ = {
@@ -192,15 +253,8 @@
 		FEDFAC7E2C8E7AFF0089A0D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */,
-				FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */,
-				FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */,
-				FEDFAC702C8E78260089A0D5 /* GasLevelView.swift */,
-				FEDFAC7A2C8E7A8B0089A0D5 /* TrailingNavigationItem.swift */,
-				FEDFAC7C2C8E7AC20089A0D5 /* DateInfoView.swift */,
-				FE0C151F2C87931600CDEA0A /* HomeView.swift */,
-				FEDFAC722C8E78520089A0D5 /* LeadingNavigationItem.swift */,
-				FEDFAC6E2C8E77D80089A0D5 /* HeaderView.swift */,
+				FE2A6C8D2D8DE684005D224C /* SwiftUI */,
+				FE2A6C8A2D8DE625005D224C /* UIKit */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,12 +396,14 @@
 				FEDFAC712C8E78260089A0D5 /* GasLevelView.swift in Sources */,
 				FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */,
 				FE4EB0932D8D12EC00CEB811 /* BluetoothService.swift in Sources */,
+				FE2A6C8C2D8DE664005D224C /* DeviceRowCell.swift in Sources */,
 				FEDFAC812C8E7C810089A0D5 /* HomeView.swift in Sources */,
 				FEDFAC732C8E78520089A0D5 /* LeadingNavigationItem.swift in Sources */,
 				FEDFAC7D2C8E7AC20089A0D5 /* DateInfoView.swift in Sources */,
 				FE0AAD2A2C7A9BAC00AD7488 /* GasOnApp.swift in Sources */,
 				FEDFAC7B2C8E7A8B0089A0D5 /* TrailingNavigationItem.swift in Sources */,
 				FE2111602CADB7360090153C /* UserDefaults.swift in Sources */,
+				FE2A6C892D8DE549005D224C /* DeviceListViewModel.swift in Sources */,
 				FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */,
 				FEDFAC6F2C8E77D80089A0D5 /* HeaderView.swift in Sources */,
 				FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */,
