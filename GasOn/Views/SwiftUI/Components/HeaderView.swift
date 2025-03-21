@@ -24,7 +24,7 @@ struct HeaderView: View {
     }
     
     private func formattedDate(_ date: Date?) -> String {
-        guard let date = date else { return "N/A" }
+        guard let date = date else { return "Não definido" }
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .none 

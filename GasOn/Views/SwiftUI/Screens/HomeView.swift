@@ -9,10 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: GasDataViewModel
-
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-    }
      
     var body: some View {
         NavigationView {

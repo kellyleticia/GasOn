@@ -27,10 +27,6 @@ struct GasLevelView: View {
         ZStack {
             Image(gasImage)
                 .padding(.bottom, 50)
-//            Text("\(percentage, specifier: "%.0f")%")
-//                .foregroundColor(.white)
-//                .font(.system(size: 35, weight: .semibold, design: .rounded))
-//                .padding(.top, 120)
         }
     }
 }
