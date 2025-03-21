@@ -72,6 +72,10 @@
 		FE2A6C9C2D8E11AF005D224C /* MockBluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBluetoothService.swift; sourceTree = "<group>"; };
 		FE2A6C9E2D8E11C3005D224C /* DeviceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModelTests.swift; sourceTree = "<group>"; };
 		FE2A6CA02D8E1D1D005D224C /* PeripheralProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralProtocol.swift; sourceTree = "<group>"; };
+		FE2A6CA22D8E27B4005D224C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FE2A6CA42D8E2968005D224C /* home.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.PNG; sourceTree = "<group>"; };
+		FE2A6CA52D8E2971005D224C /* ble.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ble.PNG; sourceTree = "<group>"; };
+		FE2A6CA62D8E29A6005D224C /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRow.swift; sourceTree = "<group>"; };
@@ -116,6 +120,9 @@
 		FE0AAD1D2C7A9BAC00AD7488 = {
 			isa = PBXGroup;
 			children = (
+				FE2A6CA62D8E29A6005D224C /* LICENSE */,
+				FE2A6CA32D8E28D2005D224C /* Screenshots */,
+				FE2A6CA22D8E27B4005D224C /* README.md */,
 				FEF368232CAB23C000698BC7 /* .gitignore */,
 				FE0AAD282C7A9BAC00AD7488 /* GasOn */,
 				FE0AAD3B2C7A9BAD00AD7488 /* GasOnTests */,
@@ -244,6 +251,15 @@
 				FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		FE2A6CA32D8E28D2005D224C /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				FE2A6CA52D8E2971005D224C /* ble.PNG */,
+				FE2A6CA42D8E2968005D224C /* home.PNG */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		FE4EB0902D8D11E300CEB811 /* Extensions */ = {
