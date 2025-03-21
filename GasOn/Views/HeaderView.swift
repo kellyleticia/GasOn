@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @ObservedObject var bluetoothManager: BluetoothManager
+    @ObservedObject var viewModel: GasDataViewModel
 
     var body: some View {
         HStack {
-            DateInfoView(title: "Início de Uso", date: formattedDate(bluetoothManager.gasStartDate), color: .blueDefault)
+            DateInfoView(title: "Início de Uso", date: formattedDate(viewModel.gasStartDate), color: .blueDefault)
             Spacer()
-            DateInfoView(title: "Fim de Uso", date: formattedDate(bluetoothManager.gasEndDate), color: .redDefault)
+            DateInfoView(title: "Fim de Uso", date: formattedDate(viewModel.gasEndDate), color: .redDefault)
         }
         .padding(30)
         .background(Color.darkGrayDefault)

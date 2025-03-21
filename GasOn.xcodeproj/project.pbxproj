@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		FE0AAD2A2C7A9BAC00AD7488 /* GasOnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD292C7A9BAC00AD7488 /* GasOnApp.swift */; };
-		FE0AAD2C2C7A9BAC00AD7488 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD2B2C7A9BAC00AD7488 /* ContentView.swift */; };
 		FE0AAD2E2C7A9BAC00AD7488 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */; };
 		FE0AAD3D2C7A9BAD00AD7488 /* GasOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD3C2C7A9BAD00AD7488 /* GasOnTests.swift */; };
 		FE0AAD472C7A9BAD00AD7488 /* GasOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD462C7A9BAD00AD7488 /* GasOnUITests.swift */; };
 		FE0AAD492C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */; };
-		FE0AAD572C7A9DBD00AD7488 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */; };
 		FE2111602CADB7360090153C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21115F2CADB72E0090153C /* UserDefaults.swift */; };
 		FE2891EF2CAA305C00D3A8BA /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */; };
 		FE2B902E2C97AFC10058F9AC /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */; };
 		FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */; };
 		FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */; };
+		FE4EB0932D8D12EC00CEB811 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EB0922D8D12EC00CEB811 /* BluetoothService.swift */; };
+		FE4EB0952D8D137400CEB811 /* GasDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4EB0942D8D137400CEB811 /* GasDataViewModel.swift */; };
 		FE5C8A812C89DCB600EF03E4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5C8A802C89DCB600EF03E4 /* Colors.xcassets */; };
 		FE5C8A872C89E1E400EF03E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5C8A862C89E1E400EF03E4 /* Assets.xcassets */; };
 		FE5C8A892C89E29500EF03E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5C8A882C89E29500EF03E4 /* Media.xcassets */; };
@@ -50,7 +50,6 @@
 /* Begin PBXFileReference section */
 		FE0AAD262C7A9BAC00AD7488 /* GasOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0AAD292C7A9BAC00AD7488 /* GasOnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnApp.swift; sourceTree = "<group>"; };
-		FE0AAD2B2C7A9BAC00AD7488 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE0AAD2D2C7A9BAC00AD7488 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FE0AAD382C7A9BAD00AD7488 /* GasOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GasOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0AAD3C2C7A9BAD00AD7488 /* GasOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnTests.swift; sourceTree = "<group>"; };
@@ -58,13 +57,14 @@
 		FE0AAD462C7A9BAD00AD7488 /* GasOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnUITests.swift; sourceTree = "<group>"; };
 		FE0AAD482C7A9BAD00AD7488 /* GasOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FE0AAD552C7A9CEF00AD7488 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		FE0C151F2C87931600CDEA0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FE21115F2CADB72E0090153C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FE2891EE2CAA305C00D3A8BA /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		FE3D5DDD2CAB128500E44DB1 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		FE3D5DDF2CAB12C500E44DB1 /* DeviceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRow.swift; sourceTree = "<group>"; };
+		FE4EB0922D8D12EC00CEB811 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
+		FE4EB0942D8D137400CEB811 /* GasDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasDataViewModel.swift; sourceTree = "<group>"; };
 		FE5C8A802C89DCB600EF03E4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		FE5C8A862C89E1E400EF03E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE5C8A882C89E29500EF03E4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -125,6 +125,8 @@
 		FE0AAD282C7A9BAC00AD7488 /* GasOn */ = {
 			isa = PBXGroup;
 			children = (
+				FE4EB0912D8D129C00CEB811 /* Services */,
+				FE4EB0902D8D11E300CEB811 /* Extensions */,
 				FE0AAD292C7A9BAC00AD7488 /* GasOnApp.swift */,
 				FE0AAD552C7A9CEF00AD7488 /* Info.plist */,
 				FE5C8A862C89E1E400EF03E4 /* Assets.xcassets */,
@@ -166,10 +168,25 @@
 		FE2891ED2CAA302600D3A8BA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				FE21115F2CADB72E0090153C /* UserDefaults.swift */,
-				FE0AAD562C7A9DBD00AD7488 /* BluetoothManager.swift */,
+				FE4EB0942D8D137400CEB811 /* GasDataViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE4EB0902D8D11E300CEB811 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FE21115F2CADB72E0090153C /* UserDefaults.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE4EB0912D8D129C00CEB811 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FE4EB0922D8D12EC00CEB811 /* BluetoothService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		FEDFAC7E2C8E7AFF0089A0D5 /* Views */ = {
@@ -180,7 +197,6 @@
 				FE2B902D2C97AFC10058F9AC /* ConnectionView.swift */,
 				FEDFAC702C8E78260089A0D5 /* GasLevelView.swift */,
 				FEDFAC7A2C8E7A8B0089A0D5 /* TrailingNavigationItem.swift */,
-				FE0AAD2B2C7A9BAC00AD7488 /* ContentView.swift */,
 				FEDFAC7C2C8E7AC20089A0D5 /* DateInfoView.swift */,
 				FE0C151F2C87931600CDEA0A /* HomeView.swift */,
 				FEDFAC722C8E78520089A0D5 /* LeadingNavigationItem.swift */,
@@ -320,13 +336,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE0AAD2C2C7A9BAC00AD7488 /* ContentView.swift in Sources */,
 				FE0AAD2E2C7A9BAC00AD7488 /* Item.swift in Sources */,
 				FE3D5DDE2CAB128500E44DB1 /* DeviceListView.swift in Sources */,
+				FE4EB0952D8D137400CEB811 /* GasDataViewModel.swift in Sources */,
 				FEDFAC712C8E78260089A0D5 /* GasLevelView.swift in Sources */,
 				FE3D5DE02CAB12C500E44DB1 /* DeviceRow.swift in Sources */,
+				FE4EB0932D8D12EC00CEB811 /* BluetoothService.swift in Sources */,
 				FEDFAC812C8E7C810089A0D5 /* HomeView.swift in Sources */,
-				FE0AAD572C7A9DBD00AD7488 /* BluetoothManager.swift in Sources */,
 				FEDFAC732C8E78520089A0D5 /* LeadingNavigationItem.swift in Sources */,
 				FEDFAC7D2C8E7AC20089A0D5 /* DateInfoView.swift in Sources */,
 				FE0AAD2A2C7A9BAC00AD7488 /* GasOnApp.swift in Sources */,

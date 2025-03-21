@@ -12,11 +12,11 @@ struct GasLevelView: View {
     
     private var gasImage: String {
         switch percentage {
-        case 80...100:
+        case 90...100:
             return "BlueGas"
-        case 20..<80:
+        case 50..<90:
             return "YellowGas"
-        case 0..<20:
+        case 0..<50:
             return "RedGas"
         default:
             return "BlueGas"

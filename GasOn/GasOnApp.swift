@@ -7,10 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import CoreBluetooth
 
 @main
 struct GasOnApp: App {
-    @StateObject private var bluetoothManager = BluetoothManager()
+    @StateObject private var bluetoothService = BluetoothService()
+    @StateObject private var viewModel = GasDataViewModel()
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -31,8 +33,9 @@ struct GasOnApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(bluetoothManager)
+            HomeView()
+                .environmentObject(viewModel)
+                .environmentObject(bluetoothService)
         }
         .modelContainer(sharedModelContainer)
     }

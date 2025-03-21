@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var bluetoothManager: BluetoothManager
+    @EnvironmentObject var viewModel: GasDataViewModel
 
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
-    
+     
     var body: some View {
         NavigationView {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    HeaderView(bluetoothManager: bluetoothManager)
+                    HeaderView(viewModel: viewModel)
                     Spacer()
-                    GasLevelView(percentage: bluetoothManager.receivedPercentage ?? 0)
+                    GasLevelView(percentage: viewModel.receivedPercentage ?? 0)
                     Spacer()
                 }
             }
@@ -30,9 +30,11 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: LeadingNavigationItem(), trailing: TrailingNavigationItem())
         }
+        .environmentObject(viewModel)
     }
 }
 
 #Preview {
     HomeView()
+        .environmentObject(GasDataViewModel()) 
 }
