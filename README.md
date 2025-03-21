@@ -91,11 +91,11 @@ MVVM:
 
 ---
 
-## 📸 Telas (Exemplo)
+## 📸 Telas
 
 | Tela Principal | Conexão BLE |
 |----------------|-------------|
-| <img src="Screenshots/home.png" width="200"> | <img src="Screenshots/ble.png" width="200"> |
+| <img src="Screenshots/home.PNG" width="200"> | <img src="Screenshots/ble.PNG" width="200"> |
 
 ---
                  
@@ -103,5 +103,3 @@ MVVM:
 
 Distribuído sob licença MIT. Veja [LICENSE](LICENSE) para mais detalhes.
 ```
-
----
